@@ -1,5 +1,6 @@
 import { log } from "console";
 import ReadLine from "readline";
+import matchPattern from "./matcher/index.js";
 
 const rl = ReadLine.createInterface({
     input: process.stdin,
@@ -10,6 +11,20 @@ const rl = ReadLine.createInterface({
 rl.setPrompt("> ");
 rl.prompt();
 rl.on("line", reply => {
-    console.log(`You said ${reply}`);
-    rl.prompt();
+    matchPattern(reply, data => {
+        switch(data.intent) {
+            case "Hello":
+                console.log(`${data.entities[0]} to you too`);
+                rl.prompt();
+                break;
+            case "Exit":
+                console.log("Have a good day.");
+                process.exit(0);
+                break;
+            default:{
+                console.log("I don't know what you mean :(");
+                rl.prompt();
+            }
+        }
+    });
 });

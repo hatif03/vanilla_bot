@@ -4,6 +4,9 @@ const patternDict = [{
 },{
     pattern: "\\b(Bye|Exit)\\b",
     intent: "Exit"
+},{
+    pattern: "like\\sin\\s\\b(?<city>.+)",
+    intent: "CurrentWeather"
 }];
 
 export default patternDict;

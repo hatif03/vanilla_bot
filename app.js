@@ -2,6 +2,7 @@ import { log } from "console";
 import ReadLine from "readline";
 import matchPattern from "./matcher/index.js";
 import getWeather from "./weather/index.js";
+import currentWeather from "./parser/index.js";
 
 const rl = ReadLine.createInterface({
     input: process.stdin,
@@ -23,12 +24,17 @@ rl.on("line", reply => {
                 process.exit(0);
                 break;
             case "CurrentWeather":
-                console.log(`Checking weather for ${data.entities[0]} ...`);
-                getWeather(data.entities[0])
-                    .then(response => console.log(response))
+                console.log(`Checking weather for ${data.entities[1]} ...`);
+                getWeather(data.entities[1])
+                    .then(response => {
+                        let parseResult = currentWeather(response);
+                        console.log(parseResult);
+                        rl.prompt();
+                    })
                     .catch(error => {
                         console.log(error);
-                        console.log("There seems to be a problem connecting to weather services");
+                        console.log("I don't seem to know anything about this location ... Sorry :)");
+                        rl.prompt();
                     })
                 rl.prompt();
                 break;

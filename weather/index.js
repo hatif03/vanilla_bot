@@ -6,9 +6,9 @@ const formatData = (data) => {
     return {
         location: `${data.location.name}, ${data.location.country}`,
         temperature: `${data.current.temperature}`,
-        condition: `${data.current.weather_descriptions[0]}`,
+        condition: `${data.current.weather_descriptions}`,
         code: `${data.current.weather_code}`,
-        forecast: `${data.current.weather_descriptions[0]}`,
+        forecast: `${data.current.weather_descriptions}`,
     }
 };
 

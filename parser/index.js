@@ -1,4 +1,4 @@
-import colors from "colors"
+import colors from "colors";
 
 const getFeel = temp => {
     if(temp<5){
@@ -22,4 +22,5 @@ const currentWeather = response => {
     at ${String(response.temperature).red} 'C`;
 };
 
-export default currentWeather
+
+export default currentWeather;
